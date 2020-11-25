@@ -5,16 +5,18 @@ import 'package:flutter/material.dart';
 import './slide_dialog.dart';
 
 /// Display slide dialog.
-/// 
+///
 /// `barrierColor` Color of outside dialog. Defaults to Colors.black.withOpacity(0.7).
-/// 
+///
 /// `barrierDismissible` Can be dismissed by tapping outside dialog. Defaults to true.
-/// 
+///
 /// `transitionDuration` Duration of slide transition. Defaults to Duration(milliseconds: 300).
-/// 
+///
 /// `pillColor` Color of pill inside dialog. Defaults to Colors.blueGrey[200].
-/// 
+///
 /// `backgroundColor` Color of dialog background. Defaults to Theme.of(context).canvasColor.
+///
+/// `heightPercentage` Height of the popup as a number from 0.0 to 1.0 reflecting the percentage of the screen
 Future<T> showSlideDialog<T>({
   @required BuildContext context,
   @required Widget child,
@@ -23,6 +25,8 @@ Future<T> showSlideDialog<T>({
   Duration transitionDuration = const Duration(milliseconds: 300),
   Color pillColor,
   Color backgroundColor,
+  double heightPercentage,
+  IconData handleIcon,
 }) {
   assert(context != null);
   assert(child != null);
@@ -42,8 +46,10 @@ Future<T> showSlideDialog<T>({
           opacity: animation1.value,
           child: SlideDialog(
             child: child,
+            height: heightPercentage,
             pillColor: pillColor ?? Colors.blueGrey[200],
             backgroundColor: backgroundColor ?? Theme.of(context).canvasColor,
+            handleIcon: handleIcon,
           ),
         ),
       );
